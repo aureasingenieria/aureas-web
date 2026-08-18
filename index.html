@@ -29,7 +29,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="preload" as="image" href="/assets/img/logo-aureas-light.png">
-<link rel="stylesheet" href="/assets/css/styles.css?v=4.0">
+<link rel="stylesheet" href="/assets/css/styles.css?v=4.1">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -154,13 +154,83 @@
     </div>
   </div>
 
-  <section class="section">
+  <section class="section section--galaxy">
     <svg class="bg-spiral" viewBox="0 0 800 800" aria-hidden="true">
       <g class="spin">
         <path class="spiral-eye" d="M406.0,400.0 L406.1,400.4 L406.2,400.9 L406.3,401.3 L406.3,401.8 L406.3,402.3 L406.2,402.8 L406.2,403.3 L406.0,403.8 L405.9,404.3 L405.7,404.8 L405.5,405.3 L405.2,405.8 L404.9,406.2 L404.5,406.7 L404.1,407.2 L403.7,407.6 L403.2,408.0 L402.7,408.4 L402.2,408.7 L401.6,409.1 L401.0,409.4 L400.3,409.6 L399.7,409.8"/>
         <path d="M400.3,409.6 L399.7,409.8 L399.0,410.0 L398.2,410.1 L397.5,410.2 L396.7,410.2 L395.9,410.1 L395.1,410.0 L394.3,409.9 L393.5,409.7 L392.7,409.4 L391.9,409.0 L391.1,408.6 L390.3,408.2 L389.5,407.6 L388.8,407.0 L388.1,406.3 L387.4,405.6 L386.7,404.8 L386.1,404.0 L385.6,403.1 L385.1,402.1 L384.7,401.1 L384.3,400.0 L384.0,398.9 L383.8,397.7 L383.6,396.5 L383.6,395.3 L383.6,394.0 L383.7,392.7 L383.9,391.4 L384.2,390.1 L384.6,388.8 L385.1,387.5 L385.7,386.2 L386.4,384.9 L387.2,383.7 L388.1,382.4 L389.2,381.3 L390.3,380.1 L391.5,379.0 L392.9,378.0 L394.3,377.1 L395.8,376.3 L397.4,375.5 L399.1,374.9 L400.9,374.3 L402.7,373.9 L404.7,373.6 L406.6,373.4 L408.6,373.4 L410.7,373.5 L412.8,373.7 L414.9,374.2 L417.0,374.7 L419.2,375.5 L421.3,376.4 L423.4,377.4 L425.4,378.7 L427.4,380.1 L429.4,381.6 L431.3,383.4 L433.0,385.3 L434.7,387.4 L436.3,389.6 L437.7,392.0 L439.0,394.5 L440.2,397.2 L441.1,400.0 L441.9,402.9 L442.5,406.0 L442.9,409.1 L443.1,412.3 L443.0,415.7 L442.7,419.0 L442.2,422.4 L441.4,425.9 L440.3,429.3 L439.0,432.7 L437.4,436.1 L435.6,439.5 L433.4,442.8 L431.0,446.0 L428.3,449.1 L425.4,452.0 L422.2,454.8 L418.7,457.5 L414.9,459.9 L411.0,462.1 L406.7,464.1 L402.3,465.8 L397.7,467.2 L392.8,468.3 L387.8,469.1 L382.7,469.6 L377.4,469.7 L372.0,469.4 L366.5,468.7 L360.9,467.7 L355.4,466.2 L349.8,464.2 L344.3,461.9 L338.8,459.1 L333.4,455.9 L328.1,452.2 L323.1,448.1 L318.2,443.5 L313.5,438.5 L309.1,433.1 L305.0,427.2 L301.2,421.0 L297.8,414.4 L294.9,407.4 L292.3,400.0 L290.3,392.3 L288.7,384.4 L287.7,376.1 L287.3,367.7 L287.4,359.0 L288.2,350.2 L289.6,341.3 L291.7,332.3 L294.4,323.3 L297.9,314.3 L302.0,305.4 L306.9,296.6 L312.5,288.0 L318.8,279.6 L325.8,271.5 L333.5,263.7 L342.0,256.4 L351.1,249.5 L360.9,243.2 L371.3,237.4 L382.4,232.2 L394.0,227.8 L406.1,224.0 L418.8,221.1 L431.9,219.0 L445.4,217.8 L459.3,217.6 L473.4,218.3 L487.8,220.1 L502.3,222.9 L516.8,226.8 L531.4,231.8 L545.9,237.9 L560.3,245.2 L574.4,253.7 L588.1,263.3 L601.4,274.1 L614.3,286.1 L626.5,299.2 L638.0,313.4 L648.7,328.7 L658.6,345.0 L667.4,362.4 L675.2,380.8 L681.9,400.0"/>
       </g>
     </svg>
+
+    <!-- COSMOS DE ANCHO COMPLETO (100% viewport width) -->
+    <div class="orbit-cosmos" aria-hidden="true">
+      <!-- Flanco izquierdo: telemetría y escala técnica -->
+      <div class="orbit-flank orbit-flank--left">
+        <div class="orbit-ruler">
+          <span></span><span></span><span></span><span></span><span class="ruler-major"></span>
+          <span></span><span></span><span></span><span></span><span class="ruler-major"></span>
+          <span></span><span></span><span></span><span></span><span class="ruler-major"></span>
+        </div>
+        <div class="orbit-data">
+          <span class="data-tag">RATIO 1.618 · PHI</span>
+          <span class="data-sub">ELCHE · 38.26° N 0.69° W</span>
+          <span class="data-val">BT · COITI LEV-03</span>
+        </div>
+      </div>
+
+      <!-- Flanco derecho: telemetría y coordenadas angulares -->
+      <div class="orbit-flank orbit-flank--right">
+        <div class="orbit-data text-right">
+          <span class="data-tag">SISTEMA ÁUREO</span>
+          <span class="data-sub">R.E.B.T. · LICENCIAS</span>
+          <span class="data-val">4 ÁREAS TÉCNICAS</span>
+        </div>
+        <div class="orbit-ruler orbit-ruler--rev">
+          <span></span><span></span><span></span><span></span><span class="ruler-major"></span>
+          <span></span><span></span><span></span><span></span><span class="ruler-major"></span>
+          <span></span><span></span><span></span><span></span><span class="ruler-major"></span>
+        </div>
+      </div>
+
+      <!-- Constelaciones y estrellas en todo el ancho -->
+      <span class="star star--edge-left-1">✦</span>
+      <span class="star star--edge-left-2">✦</span>
+      <span class="star star--edge-left-3">✦</span>
+      <span class="star star--mid-left-1">✦</span>
+      <span class="star star--mid-left-2">✦</span>
+      <span class="star star--mid-left-3">✦</span>
+      <span class="star star--1">✦</span>
+      <span class="star star--2">✦</span>
+      <span class="star star--3">✦</span>
+      <span class="star star--4">✦</span>
+      <span class="star star--5">✦</span>
+      <span class="star star--6">✦</span>
+      <span class="star star--mid-right-1">✦</span>
+      <span class="star star--mid-right-2">✦</span>
+      <span class="star star--mid-right-3">✦</span>
+      <span class="star star--edge-right-1">✦</span>
+      <span class="star star--edge-right-2">✦</span>
+      <span class="star star--edge-right-3">✦</span>
+
+      <!-- Micro puntos luminosos -->
+      <span class="star star--dot dot--edge-left-1"></span>
+      <span class="star star--dot dot--edge-left-2"></span>
+      <span class="star star--dot dot--1"></span>
+      <span class="star star--dot dot--2"></span>
+      <span class="star star--dot dot--3"></span>
+      <span class="star star--dot dot--4"></span>
+      <span class="star star--dot dot--edge-right-1"></span>
+      <span class="star star--dot dot--edge-right-2"></span>
+
+      <!-- Estrellas fugaces sincronizadas con el destello áureo -->
+      <span class="shooting-star shooting-star--1"></span>
+      <span class="shooting-star shooting-star--2"></span>
+      <span class="shooting-star shooting-star--3"></span>
+      <span class="shooting-star shooting-star--4"></span>
+      <span class="shooting-star shooting-star--wide-left"></span>
+      <span class="shooting-star shooting-star--wide-right"></span>
+    </div>
+
     <div class="container">
       <div class="section__head reveal">
         <p class="eyebrow">Qué hacemos</p>
@@ -168,60 +238,6 @@
       </div>
       <div class="reveal">
         <div class="orbit-stage">
-          <div class="orbit-cosmos" aria-hidden="true">
-            <!-- Flanco izquierdo: telemetría y escala técnica -->
-            <div class="orbit-flank orbit-flank--left">
-              <div class="orbit-ruler">
-                <span></span><span></span><span></span><span></span><span class="ruler-major"></span>
-                <span></span><span></span><span></span><span></span><span class="ruler-major"></span>
-                <span></span><span></span><span></span><span></span><span class="ruler-major"></span>
-              </div>
-              <div class="orbit-data">
-                <span class="data-tag">RATIO 1.618 · PHI</span>
-                <span class="data-sub">ELCHE · 38.26° N 0.69° W</span>
-                <span class="data-val">BT · COITI LEV-03</span>
-              </div>
-            </div>
-
-            <!-- Flanco derecho: telemetría y coordenadas angulares -->
-            <div class="orbit-flank orbit-flank--right">
-              <div class="orbit-data text-right">
-                <span class="data-tag">SISTEMA ÁUREO</span>
-                <span class="data-sub">R.E.B.T. · LICENCIAS</span>
-                <span class="data-val">4 ÁREAS TÉCNICAS</span>
-              </div>
-              <div class="orbit-ruler orbit-ruler--rev">
-                <span></span><span></span><span></span><span></span><span class="ruler-major"></span>
-                <span></span><span></span><span></span><span></span><span class="ruler-major"></span>
-                <span></span><span></span><span></span><span></span><span class="ruler-major"></span>
-              </div>
-            </div>
-
-            <!-- Estrellas fijas titilantes en todo el ancho -->
-            <span class="star star--far-left-top">✦</span>
-            <span class="star star--far-left-mid">✦</span>
-            <span class="star star--far-left-bot">✦</span>
-            <span class="star star--far-right-top">✦</span>
-            <span class="star star--far-right-mid">✦</span>
-            <span class="star star--far-right-bot">✦</span>
-            <span class="star star--1">✦</span>
-            <span class="star star--2">✦</span>
-            <span class="star star--3">✦</span>
-            <span class="star star--4">✦</span>
-            <span class="star star--5">✦</span>
-            <span class="star star--6">✦</span>
-            <span class="star star--dot dot--far-left"></span>
-            <span class="star star--dot dot--far-right"></span>
-            <span class="star star--dot dot--1"></span>
-            <span class="star star--dot dot--2"></span>
-            <span class="star star--dot dot--3"></span>
-            <span class="star star--dot dot--4"></span>
-            <!-- Estrellas fugaces sincronizadas con el destello áureo -->
-            <span class="shooting-star shooting-star--1"></span>
-            <span class="shooting-star shooting-star--2"></span>
-            <span class="shooting-star shooting-star--3"></span>
-            <span class="shooting-star shooting-star--4"></span>
-          </div>
       <svg class="orbit-stage__deco" viewBox="0 0 1000 1000" aria-hidden="true">
         <g class="deco-spin">
           <circle class="deco-dash" cx="500" cy="500" r="470"/>
@@ -410,6 +426,6 @@
     <span><a href="/aviso-legal/">Aviso legal</a> · <a href="/privacidad/">Privacidad</a></span>
   </div>
 </footer>
-<script src="/assets/js/main.js?v=4.0"></script>
+<script src="/assets/js/main.js?v=4.1"></script>
 </body>
 </html>

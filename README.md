@@ -36,14 +36,14 @@ las rutas quedan limpias (`aureasingenieria.es/servicios/`, sin
 
 ## Qué falta rellenar
 
-**Números de colegiado de Ausiàs y Lucas.** Están en
+**Números de colegiado de Ausias y Lucas.** Están en
 `quienes-somos/index.html`, marcados con comentarios
 `<!-- AUREAS_COLEGIADO_AUSIAS -->` y `<!-- AUREAS_COLEGIADO_LUCAS -->`.
 Busca `[pendiente]` en ese archivo y sustitúyelo por el número real.
 
 **Contenido de "Quiénes somos".** El bloque grande de la página está
 marcado con un comentario `BLOQUE "NUESTRA HISTORIA / OBJETIVOS" —
-CONTENIDO PENDIENTE`. Cuando Ausiàs tenga el PowerPoint, sustituye el
+CONTENIDO PENDIENTE`. Cuando Ausias tenga el PowerPoint, sustituye el
 texto de dentro de `<div class="placeholder-block">` por el
 definitivo. La estructura (etiqueta + título + párrafo) ya está
 montada, solo hay que cambiar las palabras.
