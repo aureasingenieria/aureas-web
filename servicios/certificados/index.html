@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="/assets/img/logo-aureas-light.png">
-<link rel="stylesheet" href="/assets/css/styles.css?v=2.2">
+<link rel="stylesheet" href="/assets/css/styles.css?v=3.0">
 </head>
 <body>
 <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -45,9 +45,10 @@
     </nav>
   </div>
 </header>
+
 <main id="contenido">
 
-  <section class="section page-hero" style="padding-block-end:var(--sp-4)">
+  <section class="section page-hero">
     <svg class="page-hero__arcs" viewBox="0 0 800 800" aria-hidden="true">
       <g class="arcs-spin">
         <circle cx="400" cy="400" r="150" pathLength="100"/>
@@ -57,72 +58,48 @@
       </g>
     </svg>
     <div class="container">
-      <nav class="crumbs" aria-label="Ruta">
-        <a href="/servicios/">Servicios</a> <span aria-hidden="true">/</span> <span>Certificados y memorias técnicas</span>
+      <nav class="crumbs" aria-label="Miga de pan">
+        <a href="/">Inicio</a>
+        <span aria-hidden="true">/</span>
+        <a href="/servicios/">Servicios</a>
+        <span aria-hidden="true">/</span>
+        <span>Certificados y memorias</span>
       </nav>
-      <p class="eyebrow" style="margin-top:var(--sp-3)">03 · Todos los perfiles de cliente</p>
-      <h1 style="font-size:var(--text-h2);margin-top:var(--sp-2);max-width:20ch"><span class="gild">Certificados y memorias técnicas</span></h1>
-      <p class="lead" style="margin-top:var(--sp-3)">Redactamos y firmamos la documentación técnica que te piden, con el respaldo de la colegiación.</p>
+      <p class="eyebrow" style="margin-top:var(--sp-3)">Servicio · 03</p>
+      <h1 style="font-size:var(--text-h2);margin-top:var(--sp-2)"><span class="gild">Certificados y memorias técnicas</span></h1>
+      <p class="lead" style="margin-top:var(--sp-3)">Dictámenes periciales, certificados de solidez, persistencia y memorias valoradas con validez legal.</p>
     </div>
   </section>
 
-  <section class="section section--mist" style="padding-block:var(--sp-5)">
-    <div class="container">
-      <div class="section__head reveal" style="margin-bottom:var(--sp-4)">
-        <p class="eyebrow">Qué incluye</p>
-      </div>
-      <ul class="spec-list reveal">
-          <li class="spec-list__item">Memorias técnicas de diseño</li>
-          <li class="spec-list__item">Certificados de solidez y de ocupación</li>
-          <li class="spec-list__item">Documentación justificativa de cumplimiento normativo</li>
-          <li class="spec-list__item">Informes técnicos para requerimientos municipales</li>
-          <li class="spec-list__item">Revisión de documentación existente antes de presentar</li>
-      </ul>
-    </div>
-  </section>
-
-  <!--
-    ================================================================
-    TRABAJOS REALIZADOS — CONTENIDO PENDIENTE
-    Cuando tengáis proyectos entregados en esta línea, sustituid el
-    contenido de .placeholder-block por tarjetas con imagen y una
-    línea de descripción de cada trabajo.
-    ================================================================
-  -->
   <section class="section">
-    <div class="container">
-      <div class="plano-frame reveal" style="max-width:720px">
-        <span class="plano-frame__mark plano-frame__mark--tl" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M12 2v6M12 16v6M2 12h6M16 12h6" stroke="currentColor" stroke-width="1.2"/></svg></span>
-        <span class="plano-frame__mark plano-frame__mark--tr" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M12 2v6M12 16v6M2 12h6M16 12h6" stroke="currentColor" stroke-width="1.2"/></svg></span>
-        <span class="plano-frame__mark plano-frame__mark--bl" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M12 2v6M12 16v6M2 12h6M16 12h6" stroke="currentColor" stroke-width="1.2"/></svg></span>
-        <span class="plano-frame__mark plano-frame__mark--br" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M12 2v6M12 16v6M2 12h6M16 12h6" stroke="currentColor" stroke-width="1.2"/></svg></span>
-        <div class="placeholder-block">
-          <span class="placeholder-block__tag">Próximamente</span>
-          <h2 style="font-size:var(--text-h3)">Trabajos realizados</h2>
-          <p class="lead" style="margin-top:var(--sp-3)">
-            Iremos publicando aquí los proyectos entregados en esta línea de
-            trabajo, con imágenes y una breve descripción de cada uno.
-          </p>
-        </div>
+    <div class="container prose">
+      <div class="reveal">
+        <h2>Qué incluye este servicio</h2>
+        <p>Emisión rigurosa de documentos técnicos para trámites notariales, judiciales, bancarios o administrativos:</p>
+      </div>
+
+      <div class="spec-list reveal" style="margin-block:var(--sp-5)">
+        <div class="spec-list__item">Certificados de solidez y seguridad estructural</div>
+        <div class="spec-list__item">Certificados de antigüedad / no infracción urbanística</div>
+        <div class="spec-list__item">Memorias descriptivas y valoradas de instalaciones</div>
+        <div class="spec-list__item">Informes técnicos periciales y ratificación judicial</div>
+        <div class="spec-list__item">Visado colegial en el COITI (cuando sea preceptivo)</div>
+      </div>
+
+      <div class="reveal">
+        <h2>Rapidez y validez técnica</h2>
+        <p>Revisión in situ, toma fotográfica y entrega del documento firmado digitalmente con código seguro de verificación.</p>
       </div>
     </div>
   </section>
 
-  <section class="section cta-final">
-    <svg class="cta-final__arcs" viewBox="0 0 800 800" aria-hidden="true">
-      <g class="spin-slow">
-        <circle cx="400" cy="400" r="180"/>
-        <circle class="gold-ring" cx="400" cy="400" r="262"/>
-        <circle cx="400" cy="400" r="344"/>
-        <circle cx="400" cy="400" r="396"/>
-      </g>
-    </svg>
+  <section class="section section--mist">
     <div class="container" style="text-align:center">
       <div class="reveal">
-        <p class="eyebrow" style="justify-content:center">¿Necesitas esto para tu local?</p>
-        <h2 style="margin-top:var(--sp-2);font-size:var(--text-h3)">Cuéntanos tu caso</h2>
+        <h2 style="font-size:var(--text-h3)">¿Requieres un certificado urgente?</h2>
+        <p class="lead" style="margin-inline:auto;margin-top:var(--sp-2)">Indícanos el tipo de documento requerido y coordinamos la inspección.</p>
         <div style="margin-top:var(--sp-4)">
-          <a class="btn btn--primary" href="mailto:info@aureasingenieria.es">info@aureasingenieria.es <span class="btn__arrow" aria-hidden="true">→</span></a>
+          <a class="btn btn--primary" href="mailto:info@aureasingenieria.es">Pedir certificado <span class="btn__arrow" aria-hidden="true">→</span></a>
         </div>
       </div>
     </div>
@@ -163,6 +140,6 @@
     <span><a href="/aviso-legal/">Aviso legal</a> · <a href="/privacidad/">Privacidad</a></span>
   </div>
 </footer>
-<script src="/assets/js/main.js"></script>
+<script src="/assets/js/main.js?v=3.0"></script>
 </body>
 </html>

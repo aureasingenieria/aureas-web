@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(() => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
       progress.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
-      if (arcs && !reduced) {
+      if (arcs && !reduced && window.innerWidth > 760) {
         arcs.style.setProperty('--plx', (window.scrollY * -0.07).toFixed(1) + 'px');
       }
       ticking = false;
