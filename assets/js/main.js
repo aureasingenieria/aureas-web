@@ -322,7 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
   }
 
-  // ---------- Proceso: carrusel horizontal ----------
+  // ---------- Proceso: carrusel horizontal en móvil / cuadrícula en escritorio ----------
   const seq = document.getElementById('seq');
   const track = document.getElementById('seq-track');
   if (seq && track) {
@@ -331,6 +331,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const DUR = 6000;
     let idx = 0, timer = null, userTouched = false;
 
+    const isMobileSeq = () => window.innerWidth < 880;
+
     const mark = (i) => {
       idx = i;
       slides.forEach((s, n) => s.classList.toggle('is-current', n === i));
@@ -338,27 +340,31 @@ document.addEventListener('DOMContentLoaded', () => {
         d.classList.remove('is-running');
         d.classList.toggle('is-current', n === i);
       });
-      if (!userTouched && !reduced) {
+      if (isMobileSeq() && !userTouched && !reduced) {
         const d = dots[i];
-        d.style.setProperty('--seq-dur', DUR + 'ms');
-        void d.offsetWidth;
-        d.classList.add('is-running');
+        if (d) {
+          d.style.setProperty('--seq-dur', DUR + 'ms');
+          void d.offsetWidth;
+          d.classList.add('is-running');
+        }
       }
     };
     const scrollTo = (i) => {
-      track.scrollTo({ left: slides[i].offsetLeft - slides[0].offsetLeft, behavior: 'smooth' });
+      if (isMobileSeq()) {
+        track.scrollTo({ left: slides[i].offsetLeft - slides[0].offsetLeft, behavior: 'smooth' });
+      }
     };
     const start = () => {
       clearInterval(timer);
-      if (userTouched || reduced) return;
+      if (!isMobileSeq() || userTouched || reduced) return;
       timer = setInterval(() => { const n = (idx + 1) % slides.length; scrollTo(n); mark(n); }, DUR);
     };
     const stopAuto = () => { userTouched = true; clearInterval(timer); dots.forEach(d => d.classList.remove('is-running')); };
 
-    // sincroniza el punto activo cuando el usuario desliza
+    // sincroniza el punto activo cuando el usuario desliza en móvil
     let scrollTick = false;
     track.addEventListener('scroll', () => {
-      if (scrollTick) return;
+      if (!isMobileSeq() || scrollTick) return;
       scrollTick = true;
       requestAnimationFrame(() => {
         const mid = track.scrollLeft + track.clientWidth / 2;
@@ -378,8 +384,18 @@ document.addEventListener('DOMContentLoaded', () => {
     dots.forEach((d, n) => d.addEventListener('click', () => { stopAuto(); scrollTo(n); mark(n); }));
     seq.addEventListener('mouseenter', () => clearInterval(timer));
     seq.addEventListener('mouseleave', start);
+    window.addEventListener('resize', () => {
+      if (!isMobileSeq()) {
+        clearInterval(timer);
+        slides.forEach(s => s.classList.remove('is-current'));
+      } else {
+        start();
+      }
+    });
 
-    mark(0);
-    start();
+    if (isMobileSeq()) {
+      mark(0);
+      start();
+    }
   }
 });
