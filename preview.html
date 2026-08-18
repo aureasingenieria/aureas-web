@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AUREAS Ingeniería — Simulador y Vista Previa Móvil</title>
+<meta name="description" content="Simulador interactivo de la versión móvil para AUREAS Ingeniería. Comprueba la adaptabilidad responsive en diferentes dispositivos.">
+<link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="/assets/css/styles.css">
+<style>
+  :root {
+    --dev-width: 393px;
+    --dev-height: 852px;
+    --dev-radius: 50px;
+    --scale: 0.9;
+  }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #0b0c0e;
+    background-image: 
+      radial-gradient(circle at 50% 0%, rgba(0, 196, 196, 0.12), transparent 70%),
+      linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+    background-size: 100% 100%, 32px 32px, 32px 32px;
+    overflow-x: hidden;
+  }
+
+  /* Control bar top */
+  .preview-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(19, 21, 24, 0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--line);
+    padding: var(--sp-2) var(--sp-4);
+  }
+
+  .preview-bar__inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-3);
+    flex-wrap: wrap;
+  }
+
+  .preview-bar__brand {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+  }
+
+  .preview-bar__title {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--turquoise);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding-left: var(--sp-2);
+    border-left: 1px solid var(--line-strong);
+  }
+
+  .preview-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    flex-wrap: wrap;
+  }
+
+  .ctrl-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--panel);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    padding: 4px;
+  }
+
+  .ctrl-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    padding-inline: var(--sp-2);
+    text-transform: uppercase;
+  }
+
+  .ctrl-btn, .ctrl-select {
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--text-soft);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.18s var(--ease);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .ctrl-select {
+    background: var(--bg-soft);
+    border-color: var(--line);
+    outline: none;
+  }
+
+  .ctrl-btn:hover, .ctrl-btn.is-active {
+    background: var(--turquoise-dim);
+    color: var(--turquoise);
+    border-color: rgba(0, 196, 196, 0.4);
+  }
+
+  .ctrl-btn svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  /* Stage container */
+  .preview-stage {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--sp-5) var(--sp-3);
+    position: relative;
+  }
+
+  /* Phone Mockup Chassis */
+  .device-chassis {
+    position: relative;
+    width: var(--dev-width);
+    height: var(--dev-height);
+    background: #1a1d21;
+    border-radius: var(--dev-radius);
+    box-shadow: 
+      0 0 0 4px #2e333a,
+      0 0 0 6px #121417,
+      0 25px 60px -10px rgba(0, 0, 0, 0.8),
+      0 0 50px rgba(0, 196, 196, 0.15);
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    transform: scale(var(--scale));
+    transform-origin: center center;
+    overflow: hidden;
+    border: 3px solid #373c44;
+  }
+
+  .device-chassis.is-landscape {
+    width: var(--dev-height);
+    height: var(--dev-width);
+  }
+
+  /* Dynamic Island / Notch */
+  .device-notch {
+    display: none;
+  }
+
+  /* Status Bar */
+  .device-status-bar {
+    position: relative;
+    height: 28px;
+    padding: 6px 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #131518;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    color: #a7acb1;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    pointer-events: none;
+    z-index: 40;
+  }
+
+  .status-icons {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* Screen Iframe */
+  .device-screen {
+    width: 100%;
+    height: calc(100% - 28px);
+    border: none;
+    background: #131518;
+  }
+
+  /* Footer info */
+  .preview-footer-info {
+    text-align: center;
+    padding: var(--sp-2) var(--sp-4);
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--line);
+    background: rgba(19, 21, 24, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-3);
+  }
+
+  .preview-footer-info a {
+    color: var(--turquoise);
+  }
+
+  @media (max-width: 760px) {
+    :root {
+      --scale: 0.75;
+    }
+    .preview-bar__inner {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header class="preview-bar">
+  <div class="preview-bar__inner">
+    <div class="preview-bar__brand">
+      <a href="/" aria-label="Volver al sitio">
+        <img src="/assets/img/logo-aureas-light.png" alt="AUREAS Ingeniería" height="30">
+      </a>
+      <span class="preview-bar__title">Vista Previa Móvil</span>
+    </div>
+
+    <div class="preview-controls">
+      <!-- Selección de Página -->
+      <div class="ctrl-group">
+        <span class="ctrl-label">Página:</span>
+        <button class="ctrl-btn is-active" onclick="loadPage('/')" data-page="/">Inicio</button>
+        <button class="ctrl-btn" onclick="loadPage('/servicios/')" data-page="/servicios/">Servicios</button>
+        <button class="ctrl-btn" onclick="loadPage('/quienes-somos/')" data-page="/quienes-somos/">Nosotros</button>
+        <button class="ctrl-btn" onclick="loadPage('/contacto/')" data-page="/contacto/">Contacto</button>
+      </div>
+
+      <!-- Selección de Dispositivo -->
+      <div class="ctrl-group">
+        <span class="ctrl-label">Móvil:</span>
+        <select class="ctrl-select" id="deviceSelect" onchange="changeDevice(this.value)">
+          <option value="iphone15">iPhone 15 Pro (393×852)</option>
+          <option value="samsung24">Samsung S24 (360×780)</option>
+          <option value="iphonese">iPhone SE (375×667)</option>
+          <option value="ipadmini">iPad Mini (768×1024)</option>
+        </select>
+      </div>
+
+      <!-- Orientación y Zoom -->
+      <div class="ctrl-group">
+        <button class="ctrl-btn" onclick="toggleOrientation()" title="Girar pantalla">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
+          Girar
+        </button>
+        <button class="ctrl-btn" onclick="adjustScale(0.1)" title="Aumentar zoom">+</button>
+        <button class="ctrl-btn" onclick="adjustScale(-0.1)" title="Reducir zoom">-</button>
+      </div>
+
+      <!-- Abrir directo -->
+      <a class="btn btn--primary" id="openDirectBtn" href="/" target="_blank" style="padding: 6px 14px; font-size: 0.78rem;">
+        Abrir ventana ↗
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="preview-stage">
+  <div class="device-chassis" id="deviceChassis">
+    <!-- Notch / Dynamic Island -->
+    <div class="device-notch">
+      <div class="notch-camera"></div>
+      <div class="notch-sensor"></div>
+    </div>
+
+    <!-- Status Bar -->
+    <div class="device-status-bar">
+      <span id="currentTime">09:41</span>
+      <div class="status-icons">
+        <span>5G</span>
+        <svg width="18" height="12" viewBox="0 0 24 14" fill="currentColor">
+          <rect x="1" y="1" width="18" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+          <rect x="3" y="3" width="11" height="8" rx="1.5"/>
+          <path d="M21 4v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Live Website Iframe -->
+    <iframe class="device-screen" id="previewIframe" src="/" title="Vista previa móvil del sitio AUREAS Ingeniería"></iframe>
+  </div>
+</main>
+
+<footer class="preview-footer-info">
+  <span>📱 Vista previa en tiempo real de la versión responsive de <strong>AUREAS Ingeniería</strong>.</span>
+  <span>·</span>
+  <a href="/">Volver a la web principal</a>
+</footer>
+
+<script>
+  let currentScale = 0.9;
+  let isLandscape = false;
+  const chassis = document.getElementById('deviceChassis');
+  const iframe = document.getElementById('previewIframe');
+  const directBtn = document.getElementById('openDirectBtn');
+
+  const devices = {
+    iphone15: { width: '393px', height: '852px', radius: '50px' },
+    samsung24: { width: '360px', height: '780px', radius: '42px' },
+    iphonese: { width: '375px', height: '667px', radius: '36px' },
+    ipadmini: { width: '768px', height: '1024px', radius: '30px' }
+  };
+
+  function loadPage(path) {
+    const freshUrl = path + (path.includes('?') ? '&' : '?') + 't=' + Date.now();
+    iframe.src = freshUrl;
+    directBtn.href = path;
+    document.querySelectorAll('[data-page]').forEach(btn => {
+      btn.classList.toggle('is-active', btn.getAttribute('data-page') === path);
+    });
+  }
+
+  function changeDevice(devKey) {
+    const dev = devices[devKey] || devices.iphone15;
+    document.documentElement.style.setProperty('--dev-width', dev.width);
+    document.documentElement.style.setProperty('--dev-height', dev.height);
+    document.documentElement.style.setProperty('--dev-radius', dev.radius);
+  }
+
+  function toggleOrientation() {
+    isLandscape = !isLandscape;
+    chassis.classList.toggle('is-landscape', isLandscape);
+  }
+
+  function adjustScale(delta) {
+    currentScale = Math.min(Math.max(0.4, currentScale + delta), 1.3);
+    document.documentElement.style.setProperty('--scale', currentScale);
+  }
+
+  // Live clock updating in device status bar
+  function updateClock() {
+    const now = new Date();
+    const hrs = String(now.getHours()).padStart(2, '0');
+    const mins = String(now.getMinutes()).padStart(2, '0');
+    const el = document.getElementById('currentTime');
+    if (el) el.textContent = `${hrs}:${mins}`;
+  }
+  setInterval(updateClock, 1000);
+  updateClock();
+</script>
+</body>
+</html>

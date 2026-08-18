@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     el.textContent = new Date().getFullYear();
   });
 
-  // Menú móvil (con cierre por Escape)
+  // Menú móvil (con cierre por Escape o clic fuera)
   const toggle = document.querySelector('.nav-toggle');
   const links = document.querySelector('.nav__links');
   const closeMenu = () => {
@@ -18,12 +18,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
   if (toggle && links) {
-    toggle.addEventListener('click', () => {
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
       const open = links.classList.toggle('is-open');
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
     links.addEventListener('click', (e) => { if (e.target.closest('a')) closeMenu(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
+    document.addEventListener('click', (e) => {
+      if (links.classList.contains('is-open') && !toggle.contains(e.target) && !links.contains(e.target)) {
+        closeMenu();
+      }
+    });
   }
 
   // Aparición progresiva al hacer scroll
@@ -107,6 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ---------- Órbita de servicios ----------
   const orbit = document.getElementById('orbit');
   if (orbit) {
+    const coreEl = orbit.querySelector('#orbit-core') || orbit.querySelector('.orbit__core');
     const core = {
       ref: orbit.querySelector('[data-core-ref]'),
       title: orbit.querySelector('[data-core-title]'),
@@ -118,8 +125,10 @@ document.addEventListener('DOMContentLoaded', () => {
       text: core.text.innerHTML, cta: ''
     };
     const nodes = orbit.querySelectorAll('.orbit__node');
+    let activeNode = null;
 
     const show = (node) => {
+      activeNode = node;
       orbit.classList.add('is-paused');
       nodes.forEach((n) => n.classList.toggle('is-active', n === node));
       core.ref.textContent = node.dataset.num + ' · ' + node.dataset.who;
@@ -128,6 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
       core.cta.textContent = 'Ver detalle →';
     };
     const reset = () => {
+      activeNode = null;
       orbit.classList.remove('is-paused');
       nodes.forEach((n) => n.classList.remove('is-active'));
       core.ref.innerHTML = defaults.ref;
@@ -136,19 +146,59 @@ document.addEventListener('DOMContentLoaded', () => {
       core.cta.textContent = defaults.cta;
     };
 
+    const isTouchDevice = () => window.matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
+
     nodes.forEach((node) => {
-      node.addEventListener('mouseenter', () => show(node));
+      node.addEventListener('mouseenter', () => {
+        if (!isTouchDevice()) show(node);
+      });
       node.addEventListener('focus', () => show(node));
-      const go = () => { const h = node.dataset.href; if (h) window.location.href = h; };
-      node.addEventListener('click', go);
+
+      const go = () => {
+        const h = node.dataset.href;
+        if (h) window.location.href = h;
+      };
+
+      node.addEventListener('click', (e) => {
+        if (isTouchDevice()) {
+          // En pantallas táctiles: primer toque activa y muestra info; segundo toque navega
+          if (activeNode === node) {
+            go();
+          } else {
+            e.preventDefault();
+            show(node);
+          }
+        } else {
+          go();
+        }
+      });
+
       node.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); }
       });
     });
-    orbit.addEventListener('mouseleave', reset);
+
+    if (coreEl) {
+      coreEl.addEventListener('click', () => {
+        if (activeNode && activeNode.dataset.href) {
+          window.location.href = activeNode.dataset.href;
+        }
+      });
+    }
+
+    orbit.addEventListener('mouseleave', () => {
+      if (!isTouchDevice()) reset();
+    });
     orbit.addEventListener('focusout', (e) => {
       if (!orbit.contains(e.relatedTarget)) reset();
     });
+
+    // En pantallas táctiles, si se pulsa fuera de la órbita, reanudar giro
+    document.addEventListener('touchstart', (e) => {
+      if (activeNode && !orbit.contains(e.target)) {
+        reset();
+      }
+    }, { passive: true });
   }
 
   // ---------- Proceso: carrusel horizontal ----------
