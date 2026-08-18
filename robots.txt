@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /aviso-legal/
+Disallow: /privacidad/
+
+Sitemap: https://aureasingenieria.es/sitemap.xml
