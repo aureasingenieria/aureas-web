@@ -35,7 +35,7 @@
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
   <link rel="preload" as="image" href="/assets/img/logo-aureas-light.png">
-  <link rel="stylesheet" href="/assets/css/styles.css?v=3.5">
+  <link rel="stylesheet" href="/assets/css/styles.css?v=4.0">
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -65,7 +65,7 @@
       },
       {
         "@type": "Person",
-        "name": "Ausiàs Verdú García",
+        "name": "Ausias Verdú García",
         "jobTitle": "Ingeniero Técnico Industrial",
         "email": "ausias@aureasingenieria.es",
         "worksFor": "AUREAS Ingeniería"
@@ -87,7 +87,44 @@
       <nav class="nav" aria-label="Navegación principal">
         <ul class="nav__links" id="nav-links">
           <li><a href="/">Inicio</a></li>
-          <li><a href="/servicios/">Servicios</a></li>
+          <li class="nav-item--dropdown">
+            <a class="nav-link--dropdown" href="/servicios/" aria-haspopup="true" aria-expanded="false">
+              Servicios <span class="dropdown-chevron" aria-hidden="true">▾</span>
+            </a>
+            <div class="nav-dropdown" role="menu">
+              <a class="dropdown-item" href="/servicios/proyectos-electricos/" role="menuitem">
+                <div class="dropdown-item__icon">⚡</div>
+                <div class="dropdown-item__text">
+                  <strong>Proyectos eléctricos</strong>
+                  <span>Baja tensión, memorias MTD y visados</span>
+                </div>
+              </a>
+              <a class="dropdown-item" href="/servicios/licencias-actividad/" role="menuitem">
+                <div class="dropdown-item__icon">📋</div>
+                <div class="dropdown-item__text">
+                  <strong>Licencias de actividad</strong>
+                  <span>Aperturas, DR, ambiental y OCAs</span>
+                </div>
+              </a>
+              <a class="dropdown-item" href="/servicios/certificados/" role="menuitem">
+                <div class="dropdown-item__icon">🏅</div>
+                <div class="dropdown-item__text">
+                  <strong>Certificados y memorias</strong>
+                  <span>Solidez, persistencia y peritajes</span>
+                </div>
+              </a>
+              <a class="dropdown-item" href="/servicios/legalizaciones/" role="menuitem">
+                <div class="dropdown-item__icon">🏛️</div>
+                <div class="dropdown-item__text">
+                  <strong>Legalizaciones</strong>
+                  <span>Industria, ayuntamientos y trámites</span>
+                </div>
+              </a>
+              <div class="dropdown-footer">
+                <a href="/servicios/">Ver visión general de servicios →</a>
+              </div>
+            </div>
+          </li>
           <li><a href="/quienes-somos/" aria-current="page">Equipo</a></li>
           <li><a href="/contacto/">Contacto</a></li>
         </ul>
@@ -181,7 +218,7 @@
           </div>
           <div class="team-card">
             <div class="team-card__role">Ingeniero Técnico Industrial · COITI</div>
-            <h3 class="team-card__name">Ausiàs Verdú García</h3>
+            <h3 class="team-card__name">Ausias Verdú García</h3>
             <p class="team-card__bio">Especializado en electricidad e ingeniería RAMS (fiabilidad, disponibilidad,
               mantenibilidad y seguridad). Trayectoria técnica en el sector aeroespacial (PLD Space) y formación
               avanzada complementaria en Ingeniería Aeroespacial.</p>
@@ -236,7 +273,7 @@
       <span><a href="/aviso-legal/">Aviso legal</a> · <a href="/privacidad/">Privacidad</a></span>
     </div>
   </footer>
-  <script src="/assets/js/main.js?v=3.5"></script>
+  <script src="/assets/js/main.js?v=4.0"></script>
 </body>
 
 </html>

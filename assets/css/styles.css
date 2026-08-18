@@ -1667,3 +1667,463 @@ a.service-card .service-card__for{color:var(--turquoise)}
     max-width:none;
   }
 }
+
+/* ============ DESPLEGABLE DE SERVICIOS EN CABECERA ============ */
+.nav-item--dropdown{
+  position:relative;
+}
+.nav-link--dropdown{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  cursor:pointer;
+}
+.dropdown-chevron{
+  font-size:.65rem;
+  transition:transform .2s var(--ease);
+  color:var(--turquoise);
+  display:inline-block;
+}
+.nav-item--dropdown:hover .dropdown-chevron,
+.nav-item--dropdown.is-open .dropdown-chevron{
+  transform:rotate(180deg);
+}
+
+.nav-dropdown{
+  position:absolute;
+  top:calc(100% + 12px);
+  left:50%;
+  transform:translateX(-50%) translateY(8px);
+  width:max-content;
+  min-width:320px;
+  max-width:360px;
+  background:linear-gradient(160deg, rgba(26,29,36,0.98) 0%, rgba(14,16,20,0.98) 100%);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line-strong);
+  border-top:1px solid rgba(0,196,196,0.45);
+  border-radius:var(--radius);
+  padding:8px;
+  box-shadow:0 20px 45px -10px rgba(0,0,0,0.85), 0 0 25px -8px rgba(0,196,196,0.2);
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:opacity .22s var(--ease), transform .22s var(--ease), visibility .22s;
+  z-index:200;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+.nav-dropdown::before{
+  content:'';
+  position:absolute;
+  top:-5px;
+  left:50%;
+  transform:translateX(-50%) rotate(45deg);
+  width:8px;
+  height:8px;
+  background:rgba(26,29,36,0.98);
+  border-left:1px solid rgba(0,196,196,0.45);
+  border-top:1px solid rgba(0,196,196,0.45);
+}
+.nav-item--dropdown::after{
+  content:'';
+  position:absolute;
+  top:100%;
+  left:0;
+  right:0;
+  height:14px;
+}
+
+.nav-item--dropdown:hover .nav-dropdown,
+.nav-item--dropdown:focus-within .nav-dropdown,
+.nav-item--dropdown.is-open .nav-dropdown{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transform:translateX(-50%) translateY(0);
+}
+
+.dropdown-item{
+  display:flex !important;
+  align-items:flex-start !important;
+  gap:var(--sp-2) !important;
+  padding:8px 10px !important;
+  border-radius:4px !important;
+  text-decoration:none !important;
+  border-bottom:none !important;
+  transition:background .18s var(--ease) !important;
+}
+.dropdown-item::after{display:none !important}
+.dropdown-item:hover{
+  background:rgba(0,196,196,0.08) !important;
+}
+.dropdown-item__icon{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:26px;
+  height:26px;
+  border-radius:4px;
+  background:rgba(0,196,196,0.12);
+  border:1px solid rgba(0,196,196,0.25);
+  color:var(--turquoise);
+  font-size:.85rem;
+  flex-shrink:0;
+  margin-top:2px;
+  transition:border-color .18s var(--ease), transform .18s var(--ease);
+}
+.dropdown-item:hover .dropdown-item__icon{
+  border-color:var(--turquoise);
+  transform:scale(1.05);
+}
+.dropdown-item__text{
+  display:flex;
+  flex-direction:column;
+  gap:1px;
+}
+.dropdown-item__text strong{
+  font-family:var(--font-sans);
+  font-size:.84rem;
+  font-weight:600;
+  color:var(--text);
+  line-height:1.25;
+}
+.dropdown-item:hover .dropdown-item__text strong{
+  color:var(--turquoise);
+}
+.dropdown-item__text span{
+  font-family:var(--font-mono);
+  font-size:.7rem;
+  color:var(--text-muted);
+  line-height:1.25;
+}
+
+.dropdown-footer{
+  margin-top:4px;
+  padding-top:6px;
+  border-top:1px solid var(--line);
+  text-align:center;
+}
+.dropdown-footer a{
+  font-family:var(--font-mono) !important;
+  font-size:.72rem !important;
+  color:var(--text-soft) !important;
+  padding:4px 8px !important;
+  display:inline-block !important;
+  border-bottom:none !important;
+  transition:color .18s !important;
+}
+.dropdown-footer a::after{display:none !important}
+.dropdown-footer a:hover{
+  color:var(--gold) !important;
+}
+
+/* Adaptación móvil del menú desplegable */
+@media (max-width:760px){
+  .nav-item--dropdown{width:100%}
+  .nav-link--dropdown{
+    justify-content:space-between;
+    width:100%;
+    border-bottom:1px solid var(--line);
+  }
+  .nav-dropdown{
+    position:static;
+    transform:none !important;
+    width:100%;
+    max-width:none;
+    min-width:0;
+    box-shadow:none;
+    border:none;
+    background:rgba(0,0,0,0.25);
+    border-left:2px solid var(--turquoise);
+    border-radius:0;
+    padding:var(--sp-2) 0 var(--sp-2) var(--sp-2);
+    display:none;
+  }
+  .nav-dropdown::before{display:none}
+  .nav-item--dropdown.is-open .nav-dropdown{
+    display:flex;
+    opacity:1;
+    visibility:visible;
+  }
+  .dropdown-item{padding:8px 6px !important}
+  .dropdown-item__text strong{font-size:.88rem}
+  .dropdown-item__text span{font-size:.76rem}
+}
+
+/* ============ COMPONENTES PÁGINAS DE SERVICIO ENRIQUECIDAS ============ */
+
+/* 1. Factsheet Técnico en Cabecera */
+.service-factsheet{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  background:var(--line);
+  border:1px solid var(--line-strong);
+  border-radius:var(--radius);
+  margin-top:var(--sp-5);
+  overflow:hidden;
+  box-shadow:var(--shadow-soft);
+}
+.factsheet-item{
+  background:linear-gradient(160deg, rgba(26,29,36,0.85) 0%, rgba(16,18,22,0.92) 100%);
+  padding:var(--sp-3) var(--sp-4);
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+  position:relative;
+}
+.factsheet-item::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:2px;
+  background:linear-gradient(90deg, var(--turquoise), transparent);
+  opacity:0;
+  transition:opacity .2s var(--ease);
+}
+.factsheet-item:hover::before{
+  opacity:1;
+}
+.factsheet-label{
+  font-family:var(--font-mono);
+  font-size:.68rem;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--text-muted);
+}
+.factsheet-val{
+  font-family:var(--font-sans);
+  font-size:.88rem;
+  font-weight:600;
+  color:var(--text);
+  line-height:1.3;
+}
+.factsheet-val span{
+  color:var(--turquoise);
+  font-family:var(--font-mono);
+  font-size:.8rem;
+}
+@media (max-width:900px){
+  .service-factsheet{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:540px){
+  .service-factsheet{grid-template-columns:1fr}
+}
+
+/* 2. Flujo de Trabajo Técnico en 4 Pasos */
+.service-workflow{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:var(--sp-4);
+  margin-top:var(--sp-5);
+  position:relative;
+}
+.workflow-step{
+  background:linear-gradient(155deg, rgba(30,34,42,0.88) 0%, rgba(18,20,24,0.95) 100%);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:var(--sp-4);
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  transition:border-color .25s var(--ease), transform .25s var(--ease), box-shadow .25s var(--ease);
+}
+.workflow-step:hover{
+  border-color:rgba(0,196,196,0.45);
+  transform:translateY(-3px);
+  box-shadow:0 12px 30px -10px rgba(0,0,0,0.8), 0 0 20px -6px rgba(0,196,196,0.2);
+}
+.workflow-num{
+  font-family:var(--font-mono);
+  font-size:1.8rem;
+  line-height:1;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(0,196,196,0.55);
+  margin-bottom:var(--sp-2);
+}
+.workflow-step:hover .workflow-num{
+  -webkit-text-stroke:1px var(--turquoise);
+  text-shadow:0 0 16px rgba(0,196,196,0.4);
+}
+.workflow-title{
+  font-size:.96rem;
+  font-weight:600;
+  color:var(--text);
+  margin-bottom:var(--sp-2);
+}
+.workflow-desc{
+  font-size:.82rem;
+  color:var(--text-soft);
+  line-height:1.55;
+  margin-bottom:0;
+}
+@media (max-width:960px){
+  .service-workflow{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:580px){
+  .service-workflow{grid-template-columns:1fr}
+}
+
+/* 3. Entregables Técnicos con Iconos y Marcas */
+.deliverables-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:var(--sp-4);
+  margin-top:var(--sp-4);
+}
+.deliverable-card{
+  background:linear-gradient(150deg, rgba(28,32,40,0.85) 0%, rgba(16,18,22,0.92) 100%);
+  border:1px solid var(--line-strong);
+  border-radius:var(--radius);
+  padding:var(--sp-4);
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  gap:var(--sp-2);
+  transition:border-color .22s var(--ease), transform .22s var(--ease);
+}
+.deliverable-card:hover{
+  border-color:rgba(217,180,91,0.5);
+  transform:translateY(-2px);
+}
+.deliverable-card__icon{
+  font-size:1.5rem;
+  line-height:1;
+  color:var(--gold);
+}
+.deliverable-card h4{
+  font-size:.92rem;
+  font-weight:600;
+  color:var(--text);
+  margin:0;
+}
+.deliverable-card p{
+  font-size:.82rem;
+  color:var(--text-soft);
+  line-height:1.5;
+  margin:0;
+}
+@media (max-width:860px){
+  .deliverables-grid{grid-template-columns:1fr}
+}
+
+/* 4. Casos Reales / Tipologías */
+.cases-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:var(--sp-4);
+  margin-top:var(--sp-4);
+}
+.case-card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-left:3px solid var(--turquoise);
+  border-radius:var(--radius);
+  padding:var(--sp-4);
+  display:flex;
+  flex-direction:column;
+  gap:var(--sp-2);
+  transition:border-color .2s var(--ease), background .2s var(--ease);
+}
+.case-card:hover{
+  background:var(--panel-hover);
+  border-color:var(--line-strong);
+  border-left-color:var(--gold);
+}
+.case-card__tag{
+  font-family:var(--font-mono);
+  font-size:.7rem;
+  color:var(--turquoise);
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+.case-card h4{
+  font-size:.96rem;
+  color:var(--text);
+  margin:0;
+}
+.case-card p{
+  font-size:.84rem;
+  color:var(--text-soft);
+  line-height:1.55;
+  margin:0;
+}
+@media (max-width:760px){
+  .cases-grid{grid-template-columns:1fr}
+}
+
+/* 5. Acordeón FAQ Técnico */
+.faq-accordion{
+  display:flex;
+  flex-direction:column;
+  gap:var(--sp-3);
+  margin-top:var(--sp-4);
+}
+.faq-item{
+  background:linear-gradient(160deg, rgba(28,32,40,0.85) 0%, rgba(16,18,22,0.92) 100%);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+  transition:border-color .2s var(--ease);
+}
+.faq-item.is-open{
+  border-color:var(--line-strong);
+}
+.faq-question{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:var(--sp-3);
+  padding:var(--sp-3) var(--sp-4);
+  background:none;
+  border:none;
+  color:var(--text);
+  font-family:var(--font-sans);
+  font-size:.94rem;
+  font-weight:600;
+  text-align:left;
+  cursor:pointer;
+  transition:color .18s var(--ease);
+}
+.faq-question:hover{
+  color:var(--turquoise);
+}
+.faq-icon{
+  width:20px;
+  height:20px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:rgba(0,196,196,0.12);
+  color:var(--turquoise);
+  font-size:.8rem;
+  flex-shrink:0;
+  transition:transform .25s var(--ease), background .25s var(--ease);
+}
+.faq-item.is-open .faq-icon{
+  transform:rotate(45deg);
+  background:rgba(217,180,91,0.2);
+  color:var(--gold);
+}
+.faq-answer{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .3s var(--ease), padding .3s var(--ease);
+  padding:0 var(--sp-4);
+}
+.faq-item.is-open .faq-answer{
+  max-height:300px;
+  padding:0 var(--sp-4) var(--sp-4);
+}
+.faq-answer p{
+  font-size:.86rem;
+  color:var(--text-soft);
+  line-height:1.6;
+  margin:0;
+}

@@ -29,7 +29,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="preload" as="image" href="/assets/img/logo-aureas-light.png">
-<link rel="stylesheet" href="/assets/css/styles.css?v=3.5">
+<link rel="stylesheet" href="/assets/css/styles.css?v=4.0">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -74,7 +74,44 @@
     <nav class="nav" aria-label="Navegación principal">
       <ul class="nav__links" id="nav-links">
         <li><a href="/">Inicio</a></li>
-        <li><a href="/servicios/" aria-current="page">Servicios</a></li>
+        <li class="nav-item--dropdown">
+          <a class="nav-link--dropdown" href="/servicios/" aria-haspopup="true" aria-expanded="false" aria-current="page">
+            Servicios <span class="dropdown-chevron" aria-hidden="true">▾</span>
+          </a>
+          <div class="nav-dropdown" role="menu">
+            <a class="dropdown-item" href="/servicios/proyectos-electricos/" role="menuitem">
+              <div class="dropdown-item__icon">⚡</div>
+              <div class="dropdown-item__text">
+                <strong>Proyectos eléctricos</strong>
+                <span>Baja tensión, memorias MTD y visados</span>
+              </div>
+            </a>
+            <a class="dropdown-item" href="/servicios/licencias-actividad/" role="menuitem">
+              <div class="dropdown-item__icon">📋</div>
+              <div class="dropdown-item__text">
+                <strong>Licencias de actividad</strong>
+                <span>Aperturas, DR, ambiental y OCAs</span>
+              </div>
+            </a>
+            <a class="dropdown-item" href="/servicios/certificados/" role="menuitem">
+              <div class="dropdown-item__icon">🏅</div>
+              <div class="dropdown-item__text">
+                <strong>Certificados y memorias</strong>
+                <span>Solidez, persistencia y peritajes</span>
+              </div>
+            </a>
+            <a class="dropdown-item" href="/servicios/legalizaciones/" role="menuitem">
+              <div class="dropdown-item__icon">🏛️</div>
+              <div class="dropdown-item__text">
+                <strong>Legalizaciones</strong>
+                <span>Industria, ayuntamientos y trámites</span>
+              </div>
+            </a>
+            <div class="dropdown-footer">
+              <a href="/servicios/">Ver visión general de servicios →</a>
+            </div>
+          </div>
+        </li>
         <li><a href="/quienes-somos/">Equipo</a></li>
         <li><a href="/contacto/">Contacto</a></li>
       </ul>
@@ -98,7 +135,7 @@
     <div class="container">
       <p class="eyebrow">Servicios</p>
       <h1 style="font-size:var(--text-h2);margin-top:var(--sp-2);max-width:16ch"><span class="gild">Del proyecto a la resolución</span></h1>
-      <p class="lead" style="margin-top:var(--sp-3)">Cuatro líneas de trabajo, siempre firmadas por ingeniero colegiado. No ofrecemos dirección de obra.</p>
+      <p class="lead" style="margin-top:var(--sp-3)">Cuatro líneas de trabajo técnico integral, siempre firmadas y visadas por ingenieros técnicos industriales colegiados.</p>
     </div>
   </section>
 
@@ -309,6 +346,6 @@
     <span><a href="/aviso-legal/">Aviso legal</a> · <a href="/privacidad/">Privacidad</a></span>
   </div>
 </footer>
-<script src="/assets/js/main.js?v=3.5"></script>
+<script src="/assets/js/main.js?v=4.0"></script>
 </body>
 </html>

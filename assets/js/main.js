@@ -10,11 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Menú móvil (con cierre por Escape o clic fuera)
   const toggle = document.querySelector('.nav-toggle');
-  const links = document.querySelector('.nav__links');
+  const links = document.querySelector('.nav__links, .nav-links');
   const closeMenu = () => {
     if (links && links.classList.contains('is-open')) {
       links.classList.remove('is-open');
-      toggle.setAttribute('aria-expanded', 'false');
+      if (toggle) toggle.setAttribute('aria-expanded', 'false');
     }
   };
   if (toggle && links) {
@@ -23,7 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const open = links.classList.toggle('is-open');
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
-    links.addEventListener('click', (e) => { if (e.target.closest('a')) closeMenu(); });
+    links.addEventListener('click', (e) => { 
+      if (e.target.closest('a') && !e.target.closest('.nav-link--dropdown')) closeMenu(); 
+    });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
     document.addEventListener('click', (e) => {
       if (links.classList.contains('is-open') && !toggle.contains(e.target) && !links.contains(e.target)) {
@@ -31,6 +33,63 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // Desplegable de Servicios en la Cabecera
+  const dropdownItems = document.querySelectorAll('.nav-item--dropdown');
+  dropdownItems.forEach((item) => {
+    const trigger = item.querySelector('.nav-link--dropdown');
+    if (!trigger) return;
+
+    trigger.addEventListener('click', (e) => {
+      if (window.innerWidth <= 760) {
+        e.preventDefault();
+        const isOpen = item.classList.toggle('is-open');
+        trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      }
+    });
+
+    item.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        item.classList.remove('is-open');
+        trigger.setAttribute('aria-expanded', 'false');
+        trigger.focus();
+      }
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    dropdownItems.forEach((item) => {
+      if (!item.contains(e.target)) {
+        item.classList.remove('is-open');
+        const trigger = item.querySelector('.nav-link--dropdown');
+        if (trigger) trigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+
+  // Acordeones FAQ Técnicos
+  const faqQuestions = document.querySelectorAll('.faq-question');
+  faqQuestions.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      if (!item) return;
+      const isOpen = item.classList.contains('is-open');
+
+      const parentAccordion = item.closest('.faq-accordion');
+      if (parentAccordion) {
+        parentAccordion.querySelectorAll('.faq-item').forEach((sibling) => {
+          if (sibling !== item) {
+            sibling.classList.remove('is-open');
+            const sibBtn = sibling.querySelector('.faq-question');
+            if (sibBtn) sibBtn.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+
+      item.classList.toggle('is-open', !isOpen);
+      btn.setAttribute('aria-expanded', !isOpen ? 'true' : 'false');
+    });
+  });
 
   // Aparición progresiva al hacer scroll
   const revealEls = document.querySelectorAll('.reveal');
