@@ -48,9 +48,68 @@ document.addEventListener('DOMContentLoaded', () => {
     revealEls.forEach((el) => el.classList.add('is-visible'));
   }
 
-  // Botones de copiar correo
+  // Gestor inteligente de enlaces de correo (mailto + Webmail + Portapapeles)
+  const showMailToast = (email) => {
+    let toast = document.querySelector('.mail-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.className = 'mail-toast';
+      toast.setAttribute('role', 'status');
+      toast.setAttribute('aria-live', 'polite');
+      document.body.appendChild(toast);
+    }
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}`;
+    const outlookUrl = `https://outlook.live.com/mail/0/deeplink/compose?to=${encodeURIComponent(email)}`;
+
+    toast.innerHTML = `
+      <div class="mail-toast__inner">
+        <div class="mail-toast__info">
+          <span class="mail-toast__icon">✓</span>
+          <div>
+            <div class="mail-toast__title"><strong>Correo copiado:</strong> <span class="mail-toast__email">${email}</span></div>
+            <div class="mail-toast__hint">Abriendo tu gestor de correo predeterminado... O elígelo directamente:</div>
+          </div>
+        </div>
+        <div class="mail-toast__actions">
+          <a class="mail-toast__btn" href="${gmailUrl}" target="_blank" rel="noopener noreferrer">Abrir en Gmail</a>
+          <a class="mail-toast__btn" href="${outlookUrl}" target="_blank" rel="noopener noreferrer">Abrir en Outlook</a>
+          <button class="mail-toast__close" type="button" aria-label="Cerrar notificación">✕</button>
+        </div>
+      </div>
+    `;
+
+    toast.classList.remove('is-visible');
+    void toast.offsetWidth;
+    toast.classList.add('is-visible');
+
+    const closeBtn = toast.querySelector('.mail-toast__close');
+    let timer = setTimeout(() => {
+      toast.classList.remove('is-visible');
+    }, 8500);
+
+    closeBtn.addEventListener('click', () => {
+      clearTimeout(timer);
+      toast.classList.remove('is-visible');
+    });
+  };
+
+  // Escuchar todos los enlaces mailto
+  document.querySelectorAll('a[href^="mailto:"]').forEach((link) => {
+    link.addEventListener('click', async () => {
+      const href = link.getAttribute('href');
+      const email = href.replace(/^mailto:/i, '').split('?')[0];
+      if (!email) return;
+      try {
+        await navigator.clipboard.writeText(email);
+      } catch (_) {}
+      showMailToast(email);
+    });
+  });
+
+  // Botones dedicados de copiar correo
   document.querySelectorAll('.copy-btn').forEach((btn) => {
-    btn.addEventListener('click', async () => {
+    btn.addEventListener('click', async (e) => {
+      e.stopPropagation();
       const text = btn.getAttribute('data-copy');
       if (!text) return;
       try {
@@ -58,8 +117,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const prev = btn.textContent;
         btn.textContent = 'Copiado ✓';
         btn.classList.add('is-copied');
+        showMailToast(text);
         setTimeout(() => { btn.textContent = prev; btn.classList.remove('is-copied'); }, 1800);
-      } catch (_) { /* el mailto sigue funcionando */ }
+      } catch (_) {
+        showMailToast(text);
+      }
     });
   });
 
