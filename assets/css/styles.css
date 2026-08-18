@@ -567,7 +567,7 @@ ul{margin:0;padding:0;list-style:none}
 /* ============ FOOTER — cajetín ============ */
 .cajetin-footer{background:#0e1013;color:var(--text)}
 .cajetin-footer__top{
-  display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;
+  display:grid;grid-template-columns:1.4fr 1fr 1.2fr;
   border-top:3px solid var(--turquoise);
 }
 .cajetin-cell{padding:var(--sp-4);border-left:1px solid var(--line)}
@@ -577,16 +577,12 @@ ul{margin:0;padding:0;list-style:none}
   letter-spacing:.1em;text-transform:uppercase;
   color:var(--turquoise);margin-bottom:var(--sp-2);
 }
-.cajetin-cell a,.cajetin-cell p{color:var(--text-soft);font-size:.9rem}
+.cajetin-cell a,.cajetin-cell p{color:var(--text-soft);font-size:.9rem;margin:0 0 var(--sp-1)}
 .cajetin-cell ul li{margin-bottom:var(--sp-1)}
 .cajetin-cell a{transition:color .18s}
 .cajetin-cell a:hover{color:var(--turquoise)}
-.cajetin-footer__brand img{height:26px;margin-bottom:var(--sp-2)}
-.cajetin-footer__brand p{color:var(--text-muted);font-size:.85rem;max-width:32ch}
-.cajetin-cell__coords{
-  font-family:var(--font-mono);font-size:.74rem;
-  color:var(--text-muted);margin-top:var(--sp-1);
-}
+.cajetin-footer__brand img{height:28px;width:auto;margin-bottom:var(--sp-2)}
+.cajetin-footer__brand p{color:var(--text-muted);font-size:.85rem;max-width:32ch;margin:0}
 .cajetin-footer__bottom{
   display:flex;justify-content:space-between;align-items:center;
   flex-wrap:wrap;gap:var(--sp-2);
@@ -598,9 +594,37 @@ ul{margin:0;padding:0;list-style:none}
 .cajetin-footer__bottom a{color:var(--text-soft);transition:color .18s}
 .cajetin-footer__bottom a:hover{color:var(--turquoise)}
 @media (max-width:760px){
-  .cajetin-footer__top{grid-template-columns:1fr}
-  .cajetin-cell{border-left:none;border-top:1px solid var(--line)}
-  .cajetin-cell:first-child{border-top:none}
+  .cajetin-footer__top{
+    grid-template-columns: 1fr 1fr;
+  }
+  .cajetin-cell{
+    padding: var(--sp-3);
+    border-left: 1px solid var(--line);
+    border-top: 1px solid var(--line);
+  }
+  .cajetin-footer__brand{
+    grid-column: 1 / -1;
+    border-left: none;
+    border-top: none;
+    padding: var(--sp-3);
+  }
+  .cajetin-cell:nth-child(2){
+    border-left: none;
+  }
+  .cajetin-cell__label{
+    font-size: .68rem;
+    margin-bottom: 6px;
+  }
+  .cajetin-cell a, .cajetin-cell p{
+    font-size: .84rem;
+  }
+  .cajetin-footer__bottom{
+    padding: var(--sp-2) var(--sp-3);
+    font-size: .72rem;
+    justify-content: center;
+    text-align: center;
+    gap: var(--sp-1) var(--sp-3);
+  }
 }
 
 /* ============ 404 ============ */
