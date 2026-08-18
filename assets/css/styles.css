@@ -501,13 +501,15 @@ ul{margin:0;padding:0;list-style:none}
 /* ============ EQUIPO ============ */
 .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-4)}
 .team-card{
+  display:flex;flex-direction:column;
   padding:var(--sp-4);background:var(--panel);
   border:1px solid var(--line);border-radius:var(--radius);
-  transition:border-color .2s var(--ease),box-shadow .2s var(--ease),transform .2s var(--ease);
+  transition:border-color .22s var(--ease),box-shadow .22s var(--ease),transform .22s var(--ease);
 }
 .team-card:hover{border-color:var(--turquoise);box-shadow:var(--shadow-soft);transform:translateY(-2px)}
-.team-card h3{font-size:1.12rem}
-.team-card__role{color:var(--text-soft);font-size:.92rem;margin:var(--sp-1) 0 0}
+.team-card h3, .team-card__name{font-size:1.15rem;margin:var(--sp-2) 0 var(--sp-2);color:var(--text);font-weight:600}
+.team-card__role{color:var(--turquoise);font-family:var(--font-mono);font-size:.76rem;letter-spacing:.04em;text-transform:uppercase}
+.team-card__bio{color:var(--text-soft);font-size:var(--text-sm);line-height:1.65;flex-grow:1;margin-bottom:var(--sp-3)}
 .team-card__col{margin:var(--sp-2) 0 0;font-family:var(--font-mono);font-size:.76rem;color:var(--turquoise)}
 @media (max-width:900px){.team-grid{grid-template-columns:1fr}}
 
@@ -953,6 +955,11 @@ ul{margin:0;padding:0;list-style:none}
   position:relative;background:var(--panel);
   padding:var(--sp-3) var(--sp-4) var(--sp-3) var(--sp-5);
   color:var(--text-soft);font-size:.95rem;
+  transition:background .2s var(--ease),color .2s var(--ease);
+}
+.spec-list__item:hover{
+  background:var(--panel-hover);
+  color:var(--text);
 }
 .spec-list__item::before{
   content:'';position:absolute;left:var(--sp-3);top:calc(var(--sp-3) + 9px);

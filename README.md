@@ -9,7 +9,7 @@ sitemap.xml, listo para desplegar en Cloudflare Pages.
 aureas-web/
 ├── index.html              → Inicio
 ├── servicios/index.html    → Servicios
-├── quienes-somos/index.html→ Quiénes somos (contenido pendiente, ver abajo)
+├── quienes-somos/index.html→ Equipo (trayectoria, visión y perfiles)
 ├── contacto/index.html     → Contacto
 ├── aviso-legal/index.html
 ├── privacidad/index.html
